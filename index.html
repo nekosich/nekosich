@@ -2,90 +2,100 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>nekosich system</title>
+  <title>nekosich system terminal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
       margin: 0;
-      background: radial-gradient(circle at center, #0f0f1f, #000010);
+      background: #000010;
       font-family: 'Fira Code', monospace;
       color: #00FFFF;
-      overflow-x: hidden;
+      padding: 20px;
+      overflow: hidden;
     }
-    h1 {
-      text-align: center;
-      font-size: 2.5em;
-      text-shadow: 0 0 15px #FF00FF, 0 0 30px #00FFFF;
-      margin-top: 60px;
-    }
-    .glitch {
-      color: white;
-      font-size: 1.2em;
-      text-align: center;
-      animation: flicker 1.5s infinite alternate;
-    }
-    @keyframes flicker {
-      0%   { opacity: 0.9; text-shadow: 0 0 2px #FF00FF, 0 0 8px #00FFFF; }
-      100% { opacity: 1; text-shadow: 0 0 8px #FF00FF, 0 0 16px #00FFFF; }
-    }
-    .spiral svg {
-      display: block;
-      margin: 0 auto;
+    .terminal {
       max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #0a0a1a;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #FF00FF;
     }
-    .footer {
-      margin-top: 80px;
-      text-align: center;
-      font-size: 0.9em;
-      color: #888;
+    .output {
+      white-space: pre-wrap;
+      line-height: 1.5em;
+      font-size: 1em;
+    }
+    input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #FF00FF;
+      color: #FFFFFF;
+      width: 100%;
+      font-size: 1em;
+      outline: none;
+      caret-color: #FF00FF;
+    }
+    .glow {
+      text-shadow: 0 0 10px #00FFFF, 0 0 20px #FF00FF;
+    }
+    .hidden {
+      display: none;
     }
   </style>
 </head>
 <body>
 
-<h1>nekosich system online</h1>
-
-<div class="spiral">
-  <svg width="100%" height="240" viewBox="0 0 800 240" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <radialGradient id="neonGrad" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#00FFFF"/>
-        <stop offset="100%" stop-color="#FF00FF"/>
-      </radialGradient>
-      <filter id="glow">
-        <feGaussianBlur stdDeviation="3.5" result="blur"/>
-        <feMerge>
-          <feMergeNode in="blur"/>
-          <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-      </filter>
-    </defs>
-    <g stroke="url(#neonGrad)" stroke-width="1" fill="none" filter="url(#glow)">
-      <circle cx="400" cy="120" r="100" stroke-dasharray="10 10" transform="rotate(10,400,120)">
-        <animateTransform attributeName="transform" type="rotate" from="0 400 120" to="360 400 120" dur="12s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="400" cy="120" r="80" stroke-dasharray="4 6" transform="rotate(-10,400,120)">
-        <animateTransform attributeName="transform" type="rotate" from="360 400 120" to="0 400 120" dur="9s" repeatCount="indefinite"/>
-      </circle>
-      <circle cx="400" cy="120" r="60" stroke-dasharray="2 4" transform="rotate(10,400,120)">
-        <animateTransform attributeName="transform" type="rotate" from="0 400 120" to="360 400 120" dur="6s" repeatCount="indefinite"/>
-      </circle>
-    </g>
-    <text x="50%" y="130" text-anchor="middle" font-family="Fira Code, monospace" font-size="22" fill="#FFFFFF"
-          style="text-shadow: 0 0 10px #FF00FF, 0 0 15px #00FFFF;">
-      NEKOSICH SYSTEM ONLINE
-    </text>
-  </svg>
+<div class="terminal">
+  <div class="output glow" id="output">
+    🧠 <span class="glow">nekosich neural interface booted</span>
+    > type a command and press enter
+  </div>
+  <input type="text" id="input" autofocus autocomplete="off" placeholder=">">
 </div>
 
-<div class="glitch">
-  <p>> Loading neural rage protocols...</p>
-  <p>> Streaming: Matrix[ff:0xA1] → 🧬</p>
-</div>
+<!-- Music Easter Egg -->
+<iframe class="hidden" id="music" width="0" height="0" 
+  src="https://www.youtube.com/embed/ZyhrYis509A?autoplay=1" 
+  frameborder="0" allow="autoplay"></iframe>
 
-<div class="footer">
-  ⛓️ nekosich 2025 — synthesized in fire and neon
-</div>
+<script>
+  const input = document.getElementById('input');
+  const output = document.getElementById('output');
+  const music = document.getElementById('music');
+
+  const commands = {
+    whoami: () => "nekosich\n🧬 Data Architect of the Neon Core.",
+    ss14: () => "🛠 Dissecting the Space Station 14 codebase...\n💀 SHITCODE DETECTED",
+    nekorage: () => {
+      document.body.style.background = '#2c001e';
+      return "🔥 NEURAL RAGE PROTOCOL INITIATED 🔥";
+    },
+    neurodump: () => `
+    ╭───────────╮
+    │ neural_log │
+    ╰───────────╯
+    [0x001] Panic at GPU temp: 93°C
+    [0x002] System recompiled under duress
+    [0x003] Operator is unstable
+    `,
+    play: () => {
+      music.classList.remove('hidden');
+      return "🎵 Loading soundtrack: chaos initialized.";
+    },
+    help: () => "Available commands: whoami, ss14, nekorage, neurodump, play, help"
+  };
+
+  input.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+      const cmd = input.value.trim().toLowerCase();
+      const response = commands[cmd] ? commands[cmd]() : `Command not found: ${cmd}`;
+      output.innerText += `\n> ${cmd}\n${response}`;
+      input.value = '';
+      output.scrollTop = output.scrollHeight;
+    }
+  });
+</script>
 
 </body>
 </html>
