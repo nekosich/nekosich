@@ -20,11 +20,11 @@
 ### 🎮 GitHub Stats
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=neurolzk&show_icons=true&theme=tokyonight&hide_title=true&bg_color=00000000"/>
+  <img src="https://github-readme-stats.vercel.app/api?username=nekosich&show_icons=true&theme=tokyonight&hide_title=true&bg_color=00000000"/>
   <br/>
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=neurolzk&theme=tokyonight&background=00000000" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=nekosich&theme=tokyonight&background=00000000" />
   <br/>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=neurolzk&layout=compact&theme=tokyonight&bg_color=00000000" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=nekosich&layout=compact&theme=tokyonight&bg_color=00000000" />
 </p>
 
 ---
